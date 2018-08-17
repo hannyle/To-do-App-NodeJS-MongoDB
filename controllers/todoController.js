@@ -18,6 +18,12 @@ const urlencodedParser = bodyParser.urlencoded({extended: false});
 module.exports = (app) => {
     //setup all request handlers
     //1. GET request for the URL
+    app.get('/', (req, res)=>{
+        Todo.find({}, (err, data)=>{
+            if(err) throw err;
+            res.render('todoView', {todos: data});
+        });
+    });
     app.get('/todo', (req, res)=>{
         //get data from mongoDB and pass it to the view
         //find({}) gets all the data from Collection/Model Todo
